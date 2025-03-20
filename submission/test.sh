@@ -185,7 +185,7 @@ check_cmd "Getting address info"
 # Debugging: Print the address info for reference
 echo "Address info: $ADDR_INFO"
 
-WALLET_INF=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getaddressinfo)
+WALLET_INF=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getaddressinfo $NEW_TAPROOT_ADDR)
 echo "Wallet info: $WALLET_INF"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
