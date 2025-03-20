@@ -62,16 +62,16 @@ echo "The treasure hunt requires 4 different types of addresses to collect funds
 echo "Generate one of each address type (legacy, p2sh-segwit, bech32, bech32m)"
 # STUDENT TASK: Generate addresses of each type
 # WRITE YOUR SOLUTION BELOW:
-LEGACY_ADDR= $(bitcoin-cli -regtest getnewaddress "" "legacy")
+LEGACY_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" "legacy")
 check_cmd "Legacy address generation"
 
-P2SH_ADDR= $(bitcoin-cli -regtest getnewaddress "" "p2sh-segwit")
+P2SH_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" "p2sh-segwit")
 check_cmd "P2SH address generation"
 
-SEGWIT_ADDR= $(bitcoin-cli -regtest getnewaddress "" "bech32")
+SEGWIT_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" "bech32")
 check_cmd "SegWit address generation"
 
-TAPROOT_ADDR= $(bitcoin-cli -regtest getnewaddress "" "bech32m")
+TAPROOT_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" "bech32m")
 check_cmd "Taproot address generation"
 
 echo "Your exploration addresses:"
@@ -100,7 +100,7 @@ echo "-------------------------------"
 echo "Treasures have been sent to your addresses. Check how much you've collected!"
 # STUDENT TASK: Check wallet balance after receiving funds and calculate how much treasure was collected
 # WRITE YOUR SOLUTION BELOW:
-NEW_BALANCE=$(bitcoin-cli -regtest getbalance "" 0)
+NEW_BALANCE=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getbalance "" 0)
 check_cmd "New balance check"
 echo "Your treasure balance: $NEW_BALANCE BTC"
 
@@ -148,7 +148,7 @@ echo "For CI testing, we'll verify the correct message directly:"
 
 # STUDENT TASK: Verify the message
 # WRITE YOUR SOLUTION BELOW:
-VERIFY_RESULT=$(bitcoin-cli -regtest verifymessage "$LEGACY_ADDR" "$SIGNATURE" "$SECRET_MESSAGE")
+VERIFY_RESULT=$(bitcoin-cli -regtest -rpcwallet=btrustwallet verifymessage $LEGACY_ADDR "$SIGNATURE" "$SECRET_MESSAGE")
 
 check_cmd "Message verification"
 echo "Message verification result: $VERIFY_RESULT"
