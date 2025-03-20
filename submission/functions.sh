@@ -117,8 +117,8 @@ trim() {
   printf '%s' "$var"
 }
 
-# Helper function to check all available wallets
-check_wallets() {
-  echo "Available wallets:"
-  bitcoin-cli -regtest listwallets | tr -d '[]"' | cut -d'"' -f2
+# Helper function to get blockcount in regtest mode
+get_blockcount() {
+  echo $(bitcoin-cli -regtest getblockcount)
 }
+
