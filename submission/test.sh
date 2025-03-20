@@ -35,7 +35,7 @@ bitcoin-cli -regtest createwallet treasurewallet
 # Generate an address for mining in the treasure wallet
 # STUDENT TASK: Generate a new address in the treasurewallet
 # WRITE YOUR SOLUTION BELOW:
-TREASURE_ADDR= $(bitcoin-cli -regtest getnewaddress "" "bech32")
+TREASURE_ADDR= $(bitcoin-cli -regtest getnewaddress "treasurewallet" "bech32")
 check_cmd "Address generation"
 echo "Mining to address: $TREASURE_ADDR"
 
