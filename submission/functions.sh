@@ -116,3 +116,9 @@ trim() {
   var="${var%"${var##*[![:space:]]}"}"
   printf '%s' "$var"
 }
+
+# Helper function to check all available wallets
+check_wallets() {
+  echo "Available wallets:"
+  bitcoin-cli -regtest listwallets | tr -d '[]"' | cut -d'"' -f2
+}
