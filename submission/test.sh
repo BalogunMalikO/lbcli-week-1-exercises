@@ -185,6 +185,9 @@ check_cmd "Getting address info"
 # Debugging: Print the address info for reference
 echo "Address info: $ADDR_INFO"
 
+WALLET_INF=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getwalletinfo)
+echo "Wallet info: $WALLET_INF"
+
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
 INTERNAL_KEY= $(echo "$ADDR_INFO" | grep -o '"taproot":{[^}]*' | grep -o '"xonly_pubkey":"[^"]*' | cut -d':' -f2)
