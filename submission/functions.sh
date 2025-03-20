@@ -117,8 +117,16 @@ trim() {
   printf '%s' "$var"
 }
 
-# Helper function to get blockcount in regtest mode
-get_blockcount() {
-  echo $(bitcoin-cli -regtest getblockcount)
+# Helper function to check block height
+check_block_height() {
+  local expected_height=$1
+  local current_height=$(bitcoin-cli -regtest getblockcount)
+  if [ $current_height -ne $expected_height ]; then
+    echo "ERROR: Block height mismatch! Expected $expected_height, got $current_height."
+    exit 1
+  fi
+
+  echo "Block height is correct: $current_height"
 }
+
 
