@@ -177,7 +177,9 @@ echo "New taproot address: $NEW_TAPROOT_ADDR"
 
 # STUDENT TASK: Get the address info to extract the internal key
 # WRITE YOUR SOLUTION BELOW:
-ADDR_INFO= $(bitcoin-cli -regtest -rpcwallet=btrustwallet getaddressinfo "$NEW_TAPROOT_ADDR")
+ADDR_INFO=  show_wallet_info "btrustwallet"
+echo "Address info: $ADDR_INFO"
+ADDR_INFO=$(trim "$ADDR_INFO")
 check_cmd "Getting address info"
 
 # Debugging: Print the address info for reference
