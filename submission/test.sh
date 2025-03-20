@@ -190,9 +190,10 @@ echo "Wallet info: $WALLET_INF"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-INTERNAL_KEY= $(echo "$ADDR_INFO" | grep -o '"taproot":{[^}]*' | grep -o '"xonly_pubkey":"[^"]*' | cut -d':' -f2)
+INTERNAL_KEY= $WALLET_INF | jq -r '.desc' | grep -o "\[.*\].*" | cut -d "]" -f2 | cut -c 3-
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
+echo "Internal key: $INTERNAL_KEY"
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
