@@ -35,7 +35,8 @@ bitcoin-cli -regtest createwallet treasurewallet
 # Generate an address for mining in the treasure wallet
 # STUDENT TASK: Generate a new address in the treasurewallet
 # WRITE YOUR SOLUTION BELOW:
-TREASURE_ADDR= $(bitcoin-cli -regtest getnewaddress "treasurewallet" "bech32")
+TREASURE_ADDR=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getnewaddress "" "bech32")
+
 check_cmd "Address generation"
 echo "Mining to address: $TREASURE_ADDR"
 
@@ -49,7 +50,7 @@ echo "-----------------------------------------"
 echo "Check your wallet balance to see what resources you have to start"
 # STUDENT TASK: Get the balance of btrustwallet
 # WRITE YOUR SOLUTION BELOW:
-BALANCE= $(bitcoin-cli -regtest getbalance "" 0)
+BALANCE=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getbalance)
 check_cmd "Balance check"
 echo "Your starting balance: $BALANCE BTC"
 
@@ -99,11 +100,12 @@ echo "-------------------------------"
 echo "Treasures have been sent to your addresses. Check how much you've collected!"
 # STUDENT TASK: Check wallet balance after receiving funds and calculate how much treasure was collected
 # WRITE YOUR SOLUTION BELOW:
-NEW_BALANCE= $(bitcoin-cli -regtest getbalance "" 0)
+NEW_BALANCE=$(bitcoin-cli -regtest getbalance "" 0)
 check_cmd "New balance check"
 echo "Your treasure balance: $NEW_BALANCE BTC"
 
-COLLECTED= $(echo "$NEW_BALANCE - $BALANCE" | bc)
+COLLECTED=$(echo "$NEW_BALANCE - $BALANCE" | bc)
+
 check_cmd "Balance calculation"
 echo "You've collected $COLLECTED BTC in treasures!"
 
@@ -114,7 +116,8 @@ echo "--------------------------------------------"
 echo "To ensure the P2SH vault is secure, verify it's a valid Bitcoin address"
 # STUDENT TASK: Validate the P2SH address
 # WRITE YOUR SOLUTION BELOW:
-P2SH_VALID= "true"
+P2SH_VALID=$(bitcoin-cli -regtest validateaddress "$P2SH_ADDR" | jq -r '.isvalid')
+
 check_cmd "Address validation"
 echo "P2SH vault validation: $P2SH_VALID"
 
@@ -145,7 +148,8 @@ echo "For CI testing, we'll verify the correct message directly:"
 
 # STUDENT TASK: Verify the message
 # WRITE YOUR SOLUTION BELOW:
-VERIFY_RESULT= $(bitcoin-cli -regtest verifymessage $LEGACY_ADDR "$SIGNATURE" "$SECRET_MESSAGE")
+VERIFY_RESULT=$(bitcoin-cli -regtest verifymessage "$LEGACY_ADDR" "$SIGNATURE" "$SECRET_MESSAGE")
+
 check_cmd "Message verification"
 echo "Message verification result: $VERIFY_RESULT"
 
