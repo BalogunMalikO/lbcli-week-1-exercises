@@ -197,8 +197,8 @@ echo "Internal key: ($INTERNAL_KEY"
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
-echo "Using internal key: $INTERNAL_KEY"
-SIMPLE_DESCRIPTOR= "combo(($INTERNAL_KEY)"
+echo "Using internal key: ($INTERNAL_KEY"
+SIMPLE_DESCRIPTOR= "combo($INTERNAL_KEY)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
