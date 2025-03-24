@@ -198,12 +198,12 @@ echo "Internal key: ($INTERNAL_KEY"
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: ($INTERNAL_KEY"
-SIMPLE_DESCRIPTOR= "combo($INTERNAL_KEY)"
+SIMPLE_DESCRIPTOR="combo($INTERNAL_KEY)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
 # WRITE YOUR SOLUTION BELOW:
-TAPROOT_DESCRIPTOR= $(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "$SIMPLE_DESCRIPTOR")
+TAPROOT_DESCRIPTOR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "$SIMPLE_DESCRIPTOR")
 check_cmd "Descriptor generation"
 TAPROOT_DESCRIPTOR=$(trim "$TAPROOT_DESCRIPTOR")
 echo "Taproot treasure map: $TAPROOT_DESCRIPTOR"
