@@ -198,7 +198,8 @@ echo "Internal key: ($INTERNAL_KEY"
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: ($INTERNAL_KEY"
-SIMPLE_DESCRIPTOR="combo($INTERNAL_KEY)"
+SIMPLE=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
+SIMPLE_DESCRIPTOR="combo($SIMPLE)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
@@ -210,7 +211,7 @@ echo "Taproot treasure map: $TAPROOT_DESCRIPTOR"
 
 # STUDENT TASK: Derive an address from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-DERIVED_ADDR_RAW= $(bitcoin-cli -regtest -rpcwallet=btrustwallet deriveaddresses "$TAPROOT_DESCRIPTOR" 0)
+DERIVED_ADDR_RAW=$(bitcoin-cli -regtest -rpcwallet=btrustwallet deriveaddresses "$TAPROOT_DESCRIPTOR" 0)
 check_cmd "Address derivation"
 DERIVED_ADDR=$(echo "$DERIVED_ADDR_RAW" | tr -d '[]" \n\t')
 echo "Derived quantum vault address: $DERIVED_ADDR"
