@@ -193,12 +193,12 @@ echo "Wallet info: $WALLET_INF"
 INTERNAL_KEY=$(echo $WALLET_INF | jq -r '.desc' | grep -o "\[.*\].*" | cut -d "]" -f2)
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
-echo "Internal key: $INTERNAL_KEY"
+echo "Internal key: ($INTERNAL_KEY"
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: $INTERNAL_KEY"
-SIMPLE_DESCRIPTOR= "combo($INTERNAL_KEY)"
+SIMPLE_DESCRIPTOR= "combo(($INTERNAL_KEY)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
