@@ -190,7 +190,7 @@ echo "Wallet info: $WALLET_INF"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-INTERNAL_KEY=$(echo $WALLET_INF | jq -r '.desc' | grep -o "\[.*\].*" | cut -d ")" -f2 )
+INTERNAL_KEY=$(echo $WALLET_INF | jq -r '.desc' | grep -o "\[.*\].*" | cut -d ")" -f2 | cut -c 3- |cut -d ")" -f1)
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
 echo "Internal key: $INTERNAL_KEY"
