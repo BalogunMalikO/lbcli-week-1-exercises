@@ -198,8 +198,11 @@ echo "Internal key: ($INTERNAL_KEY"
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: ($INTERNAL_KEY"
-SIMPLE=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
-SIMPLE_DESCRIPTOR="combo($SIMPLE)"
+INT_KEY=$(echo $INTERNAL_KEY | cut -d ")" -f1)
+CHECKSUM_=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
+echo "INTERNAL KEY: ($INT_KEY)"
+echo "CHECKSUM: ($CHECKSUM_)"
+SIMPLE_DESCRIPTOR="combo($INT_KEY$CHECKSUM)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
