@@ -204,7 +204,7 @@ CHECKSUM_=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
 echo "INTERNAL KEY: ($INT_KEY)"
 echo "CHECKSUM: ($CHECKSUM_)"
 MERGE="($INT_KEY)$CHECKSUM_"
-SIMPLE_DESCRIPTOR="combo($MERGE)"
+SIMPLE_DESCRIPTOR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "tr($INT_KEY)" | jq -r '.descriptor')
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
