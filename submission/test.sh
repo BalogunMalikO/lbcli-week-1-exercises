@@ -202,7 +202,7 @@ INT_KEY=$(echo $INTERNAL_KEY | cut -d ")" -f1)
 CHECKSUM_=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
 echo "INTERNAL KEY: ($INT_KEY)"
 echo "CHECKSUM: ($CHECKSUM_)"
-SIMPLE_DESCRIPTOR="combo($INT_KEY $CHECKSUM)"
+SIMPLE_DESCRIPTOR="combo($INT_KEY$CHECKSUM)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
