@@ -190,18 +190,21 @@ echo "Wallet info: $WALLET_INF"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-
-INTERNAL_KEY=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "$ADDR_INFO" | jq -r '.descriptor' | cut -d "]" -f2 | cut -d ")" -f1)
-
+INTERNAL_KEY=$(echo $WALLET_INF | jq -r '.desc' | grep -o "\[.*\].*" | cut -d "]" -f2 )
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
-echo "Internal key: $INTERNAL_KEY"
-
+echo "Internal key: ($INTERNAL_KEY"
+BEST_INT="($INTERNAL_KEY"
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
-echo "Using internal key: $INTERNAL_KEY"
-SIMPLE_DESCRIPTOR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "tr($INTERNAL_KEY)" | jq -r '.descriptor')
+echo "Using internal key: ($INTERNAL_KEY"
+INT_KEY=$(echo $INTERNAL_KEY | cut -d ")" -f1)
+CHECKSUM_=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
+echo "INTERNAL KEY: ($INT_KEY)"
+echo "CHECKSUM: ($CHECKSUM_)"
+MERGE="($INT_KEY)$CHECKSUM_"
+SIMPLE_DESCRIPTOR="combo($MERGE)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
