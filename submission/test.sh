@@ -191,7 +191,7 @@ echo "Wallet info: $WALLET_INF"
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
 
-INTERNAL_KEY=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "$ADDR_INFO" | jq -r '.descriptor' | cut -d "]" -f 2 | cut -d ")" -f 1)
+INTERNAL_KEY=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getdescriptorinfo "$ADDR_INFO" | jq -r '.descriptor' | cut -d "]" -f2 | cut -d ")" -f1)
 
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
