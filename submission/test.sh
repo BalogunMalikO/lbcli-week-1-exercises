@@ -203,8 +203,8 @@ INT_KEY=$(echo $INTERNAL_KEY | cut -d ")" -f1)
 CHECKSUM_=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
 echo "INTERNAL KEY: ($INT_KEY)"
 echo "CHECKSUM: ($CHECKSUM_)"
-MERGE="$INT_KEY$CHECKSUM_"
-SIMPLE_DESCRIPTOR="combo($BEST_INT)"
+MERGE="($INT_KEY)$CHECKSUM_"
+SIMPLE_DESCRIPTOR="combo($MERGE)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
