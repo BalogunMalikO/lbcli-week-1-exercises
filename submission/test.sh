@@ -194,6 +194,7 @@ INTERNAL_KEY=$(echo $WALLET_INF | jq -r '.desc' | grep -o "\[.*\].*" | cut -d "]
 check_cmd "Extracting key from descriptor"
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
 echo "Internal key: ($INTERNAL_KEY"
+BEST_INT="($INTERNAL_KEY"
 
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
@@ -203,7 +204,7 @@ CHECKSUM_=$(echo "($INTERNAL_KEY" | cut -d "#" -f2)
 echo "INTERNAL KEY: ($INT_KEY)"
 echo "CHECKSUM: ($CHECKSUM_)"
 MERGE="$INT_KEY$CHECKSUM_"
-SIMPLE_DESCRIPTOR="combo($MERGE)"
+SIMPLE_DESCRIPTOR="combo($BEST_INT)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
